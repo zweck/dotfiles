@@ -38,7 +38,7 @@ clean_before(){
 	# other examples:
 	# cutoff_time="July 23, 2010"
 	# cutoff_time="yesterday"
-	
+
 	git for-each-ref refs/heads --format='%(refname)' | egrep -v 'master|other-whitelisted-branch' |
 	while read branch; do
 	    git reflog --expire="$cutoff_time" $branch
