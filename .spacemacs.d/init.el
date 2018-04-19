@@ -142,7 +142,7 @@ values."
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    ;; The leader key
    dotspacemacs-default-font '("Fira Code"
-                               :size 20
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.5)

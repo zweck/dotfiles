@@ -48,6 +48,14 @@ clean_before(){
 	done
 }
 
+git_branch_list() {
+    git for-each-ref --sort=committerdate refs/heads/ --format='%(color: red)%(committerdate:short) %(color: cyan)%(refname:short)'
+}
+
+rclone() {
+    sudo rclone sync /home/phauser/ backblaze:callisto-ubuntu --copy-links --transfers 32 --fast-list > /dev/null 2>&1 &
+}
+
 alias cdgit='cd $(git rev-parse --show-toplevel)'
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
