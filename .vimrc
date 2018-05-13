@@ -87,7 +87,7 @@ autocmd BufWritePre *.py,*.js,*.jsx,*.rs,*.logic :call <SID>StripTrailingWhitesp
 autocmd BufWritePre * if &ft =~ 'sh\|rust\|python\|javascript' | :call <SID>StripTrailingWhitespaces() | endif
 
 " Remove scrollbars
-set guioptions= 
+set guioptions=
 
 " Easier split navigation
 nnoremap <C-J> <C-W><C-J>
