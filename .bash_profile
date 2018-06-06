@@ -7,8 +7,8 @@ GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_THEME=Minimal
 
 # Source bash git completion
-if [ -f ~/.tools/.git-completion.bash ]; then
-  . ~/.tools/.git-completion.bash
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
 fi
 
 # load the bashrd
