@@ -1,0 +1,240 @@
+
+;
+;  ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;  ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;  ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;  ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;  ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;  ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+
+[settings]
+screenchange-reload = true
+
+[colors]
+background = #282a36
+foreground = #F8F8F2
+
+dark = #1E1F26
+medium = #474b61
+light = #E6E6E6
+
+red = #FF5555
+magenta = #FF79C6
+blue = #BD93F9
+cyan = #8BE9FD
+green = #50FA7B
+yellow = #F1FA8C
+orange = #FF9F55
+
+
+[bar/callisto]
+font-0 = Fira Code:pixelsize=14;2
+font-1 = Wuncon Siji:pixelsize=18;2
+font-2 = Terminus:size=18;2
+font-3 = Font Awesome 5 Free Solid:pixelsize=14;2
+font-4 = xos4 Terminess Powerline:size=28;4
+font-5 = FuraCode Nerd Font Mono:pixelsize=30;4
+
+bottom = false
+override-redirect = false
+width = 100%
+height = 36
+offset-x = 0
+offset-y = 0
+
+background = ${colors.medium}
+foreground = ${colors.foreground}
+
+border-bottom-size = 1
+border-bottom-color = ${colors.dark}
+
+modules-left = i3 padding powerline-suffix xwindow
+modules-center =
+modules-right = powerline-prefix volume memory cpu battery powerline-prefix-green date network wifi
+
+fixed-center = false
+
+[module/i3]
+type = internal/i3
+format = <label-state><label-mode>
+index-sort = true
+wrapping-scroll = false
+strip-wsnumbers = false
+pin-workspaces = false
+enable-scroll = false
+
+label-mode = "%{T6}%{T-} %mode% %{T6}%{T-}"
+label-mode-padding = 0
+label-mode-foreground = ${colors.background}
+label-mode-background = ${colors.orange}
+
+label-focused = "%{T6}%{T-} %name% %{T6}%{T-}"
+label-focused-foreground= ${colors.background}
+label-focused-background = ${colors.green}
+label-focused-underline = ${colors.green}
+label-focused-padding = 0
+
+label-unfocused = "  %name%  "
+label-unfocused-padding = 0
+label-unfocused-background = ${colors.background}
+
+label-urgent = "%{T6}%{T-} %name% %{T6}%{T-}"
+label-urgent-foreground= ${colors.dark}
+label-urgent-background = ${colors.magenta}
+label-urgent-padding = 0
+
+label-visible = "  %name%  "
+label-visible-background = ${colors.background}
+label-visible-foreground= ${colors.green}
+label-visible-padding = ${self.label-focused-padding}
+
+
+[module/powerline-suffix]
+type = custom/text
+content = "%{T6}%{T-}"
+content-foreground = ${colors.background} 
+content-background = ${colors.medium}
+
+[module/padding]
+type = custom/text
+content = " "
+content-foreground = ${colors.background} 
+content-background = ${colors.background}
+
+[module/xwindow]
+type = internal/xwindow
+
+format-foreground = ${colors.cyan}
+format-padding = 0
+
+label = "%title%"
+label-maxlen = 250
+
+
+[module/volume]
+type = internal/alsa
+mapping = true
+master-mixer = Master
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+
+format-volume = <label-volume>
+
+label-volume =  %percentage%%
+label-volume-foreground = ${colors.orange}
+label-volume-background = ${colors.background}
+
+label-muted = Muted
+label-muted-foreground = ${colors.medium}
+label-muted-background = ${colors.background}
+
+label-volume-padding = 1
+label-muted-padding = 1
+
+[module/memory]
+type = internal/memory
+interval = 1
+label =  %percentage_used%%
+
+label-padding = 1
+
+label-foreground = ${colors.magenta}
+label-background = ${colors.background}
+
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+label =  %percentage%%
+
+label-padding = 1
+
+label-foreground = ${colors.yellow}
+label-background = ${colors.background}
+
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ACAD
+full-at = 99
+
+format-charging = <label-charging>
+format-discharging = <label-discharging>
+format-full = <label-full>
+
+label-full = " %{T4}%{T-} %percentage%%  "
+label-charging = " %{T4}%{T-} %percentage%%  "
+label-discharging = " %{T4}%{T-} %percentage%%  "
+
+label-full-foreground = ${colors.blue}
+label-charging-foreground = ${colors.green}
+animation-charging-foreground = ${colors.green}
+label-discharging-foreground = ${colors.red}
+ramp-capacity-foreground = ${colors.red}
+
+label-full-background = ${colors.background}
+label-charging-background = ${colors.background}
+animation-charging-background = ${colors.background}
+label-discharging-background = ${colors.background}
+ramp-capacity-background = ${colors.background}
+
+[module/date]
+type = internal/date
+date =  %H:%M
+date-alt =  %Y-%m-%d   %H:%M
+interval = 2
+
+label-foreground = ${colors.background}
+label-background = ${colors.green}
+label-padding   =  1
+
+[module/network]
+type = internal/network
+interface = wlp61s0
+interval = 10.0
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+
+label-connected = "  %signal%%"
+label-connected-foreground = ${colors.background}
+label-connected-background = ${colors.green}
+
+label-disconnected = "DISCONNECTED"
+label-disconnected-foreground = ${colors.background}
+label-disconnected-background = ${colors.orange}
+
+[module/weather]
+type = custom/script
+interval = 3000
+tail = true
+format-foreground = ${colors.background}
+format-padding = 1
+exec = $HOME/.scripts/weather.sh 
+
+[module/wifi]
+type = custom/text
+content = ""
+content-foreground = ${colors.background}
+content-background = ${colors.green}
+content-padding = 1
+click-left = $HOME/.scripts/rofi-wifi.sh 
+
+[module/powerline-prefix-green]
+inherit = module/powerline-prefix
+content-foreground = ${colors.green}
+content-background = ${colors.background}
+
+[module/powerline-prefix]
+type = custom/text
+content = "%{T6}%{T-}"
+content-foreground = ${colors.background}
+content-background = ${colors.medium}
