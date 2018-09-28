@@ -2,30 +2,32 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # variables
-set $purp   #5f5faf
-set $white  #ffffff
-set $bg     #282a36
-set $pink   #ff79c6
-set $green  #50fa7b
-set $black  #000000
-set $dgreen #356F4D
+set $purp    #5f5faf
+set $white   #ffffff
+set $bg      #282a36
+set $pink    #EB0E6D
+set $green   #50fa7b
+set $black   #000000
+set $dgreen  #356F4D
+set $lightbl #2EC4C9
+set $darkbl  #03607B
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 
 # colors
-# class                 border  backgr. text    indic.  child_border
-client.focused          $green  $green  $bg  $green  $green
-client.unfocused        $green  $bg     $green  $bg     $bg
-client.focused_inactive $dgreen $dgreen $white  $bg     $bg
-client.urgent           $pink   $pink   $bg  $pink   $pink
+# class                 border    backgr.   text      indic.    child_border
+client.focused          $lightbl  $lightbl  $bg       $lightbl  $lightbl
+client.unfocused        $lightbl  $bg       $lightbl  $bg       $bg
+client.focused_inactive $darkbl   $darkbl   $white    $bg       $bg
+client.urgent           $pink     $pink     $bg       $pink     $pink
 
 # set default desktop layout (default is tiling)
 workspace_layout tabbed # <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 5
 new_float normal
+default_border pixel 2
 
 # Hide borders
 hide_edge_borders none
@@ -54,7 +56,6 @@ bindsym $mod+d exec --no-startup-id dmenu_recency
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
 
-exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 
 # Start Applications
@@ -224,7 +225,7 @@ for_window [class="Thus"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
-
+for_window [title="Peek"] floating enable
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
@@ -280,7 +281,7 @@ mode "resize" {
 
 # xrandr mode
 bindsym $mod+x mode "$mode_xrandr"
-set $mode_xrandr (h)dmi, (r)eset, (k)ill_hdmi, (1-0)brightness
+set $mode_xrandr (h)dmi, (r)eset, (k)ill_hdmi, (m)ove_hdmi, (1-0)brightness
 mode "$mode_xrandr" {
     bindsym r exec xrandr -d :0.0 --output eDP1 --off && xrandr -d :0.0 --output eDP1 --auto, mode "default"
     bindsym 1 exec xrandr --output eDP1 --brightness 0.1, mode "default"
@@ -294,8 +295,16 @@ mode "$mode_xrandr" {
     bindsym 9 exec xrandr --output eDP1 --brightness 0.9, mode "default"
     bindsym 0 exec xrandr --output eDP1 --brightness 1, mode "default"
 
-    bindsym r exec pkill intel-virtual-output && xrandr --output VIRTUAL1 --off
+    bindsym k exec pkill intel-virtual && xrandr --output VIRTUAL1 --off, mode "default"
     bindsym h exec intel-virtual-output && xrandr --output eDP1 --auto --output VIRTUAL1 --auto --left-of eDP1, mode "default"
+    bindsym m mode "$mode_move_hdmi"
+
+    # exit resize mode: Enter or Escape
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+set $mode_move_hdmi ↑, ←, →
+mode "$mode_move_hdmi" {
     bindsym Up xrandr --output eDP1 --auto --output VIRTUAL1 --auto --above eDP1, mode "default"
     bindsym Left xrandr --output eDP1 --auto --output VIRTUAL1 --auto --left-of eDP1, mode "default"
     bindsym Right xrandr --output eDP1 --auto --output VIRTUAL1 --auto --right-of eDP1, mode "default"
@@ -314,16 +323,12 @@ exec --no-startup-id unclutter
 exec --no-startup-id devmon
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-#exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
-# exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb
-# exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
+# exec --no-startup-id pamac-tray
+# exec --no-startup-id clipit
 exec --no-startup-id xautolock -time 5 -locker blurlock
+exec --no-startup-id dropbox
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -358,8 +363,8 @@ bindsym $mod+m bar mode toggle
 #############################
 
 # Set inner/outer gaps
-gaps inner 50
-gaps outer 10
+gaps inner 40
+gaps outer 30
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>

@@ -1,5 +1,7 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Git bash prompt stuff
 source ~/.bash-git-prompt/gitprompt.sh
 GIT_PROMPT_ONLY_IN_REPO=1
@@ -44,6 +46,9 @@ git_branch_list() {
 export PATH=~/.tools:$PATH
 export PATH=~/bin/mongo:$PATH
 export PATH=~/bin:$PATH
+export PATH=.local/bin:$PATH
+export PATH=.local/lib/python3.6/site-packages:$PATH
+export PATH=.local/lib/python3.6:$PATH
 # source gems
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
@@ -55,3 +60,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+alias docker_stop_all="docker stop $(docker ps -q)"
