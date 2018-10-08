@@ -1,4 +1,4 @@
-colorscheme dracula
+colorscheme nord
 
 " font
 if has("gui_macvim")
@@ -18,6 +18,24 @@ syntax enable
 set softtabstop=4
 set expandtab
 set shiftwidth=4
+
+" vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Specify a directory for plugins
+call plug#begin('~/.vim/plugged')
+
+" list plugins
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'arcticicestudio/nord-vim'
+
+" Initialize plugin system
+call plug#end()
 
 " File Type specific
 filetype plugin on
@@ -49,7 +67,7 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 
 " Syntastic
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
@@ -61,16 +79,6 @@ let g:syntastic_python_checkers = ['pep8']
 
 " enable JSX highlighting in JS files
 let g:jsx_ext_required = 0
-
-" Rust
-autocmd FileType rust let g:syntastic_rust_checkers = ['rustc']
-let g:syntastic_rust_rustc_exe = 'cargo check'
-let g:syntastic_rust_rustc_fname = ''
-let g:syntastic_rust_rustc_args = '--'
-let g:syntastic_rust_checkers = ['rustc']
-
-execute pathogen#infect()
-map <C-n> :NERDTreeToggle<CR>
 
 " Remove trailing whitespace when saving.
 function! <SID>StripTrailingWhitespaces()
@@ -112,8 +120,8 @@ endif
 set backspace=indent,eol,start
 
 " Powerline
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+" python3 from powerline.vim import setup as powerline_setup
+" python3 powerline_setup()
+" python3 del powerline_setup
 " Keep it there all the time
 set laststatus=2

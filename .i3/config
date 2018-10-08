@@ -4,13 +4,13 @@
 # variables
 set $purp    #5f5faf
 set $white   #ffffff
-set $bg      #282a36
+set $bg      #222D32
 set $pink    #EB0E6D
 set $green   #50fa7b
 set $black   #000000
 set $dgreen  #356F4D
-set $lightbl #2EC4C9
-set $darkbl  #03607B
+set $lightbl #4DB6AC
+set $darkbl  #465055
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
@@ -73,9 +73,9 @@ bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
-bindsym $mod+Tab exec rofi -show window -font "Fira Code Regular 20" -show-icons -padding 600 -fullscreen
-bindsym $mod+o exec rofi -show drun -font "Fira Code Regular 20" -show-icons -padding 600 -fullscreen
-bindsym $mod+r exec rofi -show run -font "Fira Code Regular 20" -show-icons -padding 600 -fullscreen
+bindsym $mod+Tab exec rofi -show window -show-icons
+bindsym $mod+o exec rofi -show drun -show-icons
+bindsym $mod+r exec rofi -show run -show-icons
 
 focus_follows_mouse no
 
@@ -319,6 +319,7 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id polybar callisto
+exec --no-startup-id polybar crypto
 exec --no-startup-id unclutter
 exec --no-startup-id devmon
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
