@@ -46,9 +46,9 @@ git_branch_list() {
 export PATH=~/.tools:$PATH
 export PATH=~/bin/mongo:$PATH
 export PATH=~/bin:$PATH
-export PATH=.local/bin:$PATH
-export PATH=.local/lib/python3.6/site-packages:$PATH
-export PATH=.local/lib/python3.6:$PATH
+export PATH=~/.local/bin:$PATH
+export PATH=~/.local/lib/python3.6/site-packages:$PATH
+export PATH=~/.local/lib/python3.6:$PATH
 # source gems
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
