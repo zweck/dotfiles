@@ -297,7 +297,7 @@ mode "$mode_xrandr" {
     bindsym 0 exec xrandr --output eDP1 --brightness 1, mode "default"
 
     bindsym k exec pkill intel-virtual && xrandr --output VIRTUAL1 --off, mode "default"
-    bindsym h exec intel-virtual-output && xrandr --output eDP1 --auto --output VIRTUAL1 --auto --left-of eDP1, mode "default"
+    bindsym h exec xrandr --output eDP1 --auto --output HDMI2 --auto --left-of eDP1, mode "default"
     bindsym m mode "$mode_move_hdmi"
 
     # exit resize mode: Enter or Escape

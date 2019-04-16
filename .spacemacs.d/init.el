@@ -31,7 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     typescript
+     sql
+     python
      vimscript
      php
      yaml
@@ -56,6 +57,11 @@ values."
      syntax-checking
      ;; version-control
      react
+     typescript
+     (typescript :variables
+       typescript-fmt-tool 'typescript-formatter)
+     (typescript :variables
+       typescript-fmt-on-save t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -143,7 +149,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    ;; The leader key
-   dotspacemacs-default-font '("Fira Code"
+   dotspacemacs-default-font '("Fira Code Medium"
                                :size 16
                                :weight normal
                                :width normal
@@ -328,6 +334,8 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (my-setup-indent 2) ; indent 2 spaces width
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 )
 
 (defun dotspacemacs/user-config ()
@@ -491,7 +499,7 @@ you should place your code here."
  '(indent-guide-global-mode t)
  '(package-selected-packages
    (quote
-    (nord-theme tide typescript-mode vimrc-mode dactyl-mode spinner iedit anzu undo-tree parent-mode request pkg-info epl flx goto-chg highlight f diminish bind-map bind-key packed popup hydra phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode skewer-mode json-snatcher json-reformat multiple-cursors haml-mode gitignore-mode pos-tip ghub let-alist web-completion-data tern yasnippet auto-complete powerline dash-functional smartparens evil flycheck company projectile helm helm-core avy markdown-mode org-plus-contrib magit magit-popup git-commit with-editor async js2-mode simple-httpd dash s yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters pug-mode popwin persp-mode pcre2el paradox orgit org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav dumb-jump dracula-theme define-word company-web company-tern company-statistics column-enforce-mode coffee-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (sql-indent yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic treepy graphql nord-theme tide typescript-mode vimrc-mode dactyl-mode spinner iedit anzu undo-tree parent-mode request pkg-info epl flx goto-chg highlight f diminish bind-map bind-key packed popup hydra phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode skewer-mode json-snatcher json-reformat multiple-cursors haml-mode gitignore-mode pos-tip ghub let-alist web-completion-data tern yasnippet auto-complete powerline dash-functional smartparens evil flycheck company projectile helm helm-core avy markdown-mode org-plus-contrib magit magit-popup git-commit with-editor async js2-mode simple-httpd dash s yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters pug-mode popwin persp-mode pcre2el paradox orgit org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav dumb-jump dracula-theme define-word company-web company-tern company-statistics column-enforce-mode coffee-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(standard-indent 2)
  '(tab-always-indent t))
 (custom-set-faces
